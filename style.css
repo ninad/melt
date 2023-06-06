@@ -43,3 +43,17 @@ body {
 #counter {
     top: 50%;
 }
+
+/* Media queries for different viewport sizes */
+
+@media only screen and (max-width: 768px) {
+    #status, #counter {
+        font-size: 1.5em;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #status, #counter {
+        font-size: 1em;
+    }
+}
