@@ -52,14 +52,19 @@ body {
 
 /* Media queries for different viewport sizes */
 
-@media only screen and (max-width: 380px) {
-    #status, #counter {
+@media only screen and (max-device-width: 480px) and (orientation: portrait) {
+    #status {
+        font-size: 3em;
+    }
+    #counter {
         font-size: 2.5em;
     }
-
+    #counter {
+        top: 55%;
+    }
     #container {
-        width: 350px;
-        height: 350px;
+        width: 500px;
+        height: 500px;
         position: relative;
         border-radius: 50%;
         background-color: #fff;
