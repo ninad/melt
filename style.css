@@ -52,7 +52,7 @@ body {
 
 /* Media queries for different viewport sizes */
 
-@media only screen and (max-width: 580px) {
+@media only screen and (max-width: 380px) {
     #status, #counter {
         font-size: 2.5em;
     }
