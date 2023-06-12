@@ -2,20 +2,199 @@
 <html>
 <head>
     <title>Box Breathing App</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            transition: background-color 4s;
+        }
+
+        #container {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            border-radius: 50%;
+            background-color: #fff;
+            overflow: hidden;
+            border: 1px solid rgb(240, 240, 240);
+        }
+
+        #animatedCircle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: rgb(240, 240, 240);
+            transform: scale(0);
+            transition: transform 4s;
+            transform-origin: center;
+        }
+
+        #status, #counter {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            font-size: 1.5em;
+            color: #212b49;
+        }
+
+        #counter {
+            font-size: 1em;
+        }
+
+        #status {
+            top: 40%;
+        }
+
+        #counter {
+            top: 50%;
+        }
+
+        #optionCircle {
+            position: fixed; /* was: absolute */
+            bottom: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: grey;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        #selectionMenu {
+            position: fixed; /* was: absolute */
+            bottom: 60px;
+            right: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 3;
+        }
+
+        .option {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            color: #212b49;
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        @media only screen and (max-device-width: 480px) and (orientation: portrait) {
+            #status {
+                font-size: 3em;
+            }
+            #counter {
+                font-size: 2.5em;
+            }
+            #counter {
+                top: 52%;
+            }
+            #container {
+                width: 500px;
+                height: 500px;
+                position: relative;
+                border-radius: 50%;
+                background-color: #fff;
+                overflow: hidden;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div id="selection">
-        <input type="radio" id="boxBreathing" name="technique" value="box" checked>
-        <label for="boxBreathing">Box Breathing</label>
-        <input type="radio" id="breathingTechnique478" name="technique" value="478">
-        <label for="breathingTechnique478">4-7-8 Breathing</label>
-    </div>
     <div id="container">
         <div id="animatedCircle"></div>
         <div id="status">Breathe In</div>
         <div id="counter">4</div>
     </div>
-    <script src="script.js"></script>
+    <div id="optionCircle" onclick="toggleMenu()"></div>
+    <div id="selectionMenu">
+        <div class="option" onclick="changeBreathing('Calm')">Calm</div>
+        <div class="option" onclick="changeBreathing('Sleep')">Sleep</div>
+    </div>
+    </div>
+    <script>
+        window.onload = function() {
+            const breathingModes = {
+                'Calm': {
+                    steps: ["Breathe In", "Hold", "Breathe Out", "Hold"],
+                    times: [4, 4, 4, 4] // in seconds
+                },
+                'Sleep': {
+                    steps: ["Breathe In", "Hold", "Breathe Out", "Hold"],
+                    times: [4, 7, 8, 4] // in seconds
+                }
+            };
+
+            let currentMode = 'Calm';
+
+            const body = document.body;
+            const circle = document.getElementById('animatedCircle');
+            const counter = document.getElementById('counter');
+            const status = document.getElementById('status');
+
+            let currentStep = 0;
+            let currentTime = breathingModes[currentMode].times[currentStep];
+            status.textContent = breathingModes[currentMode].steps[currentStep];
+            counter.textContent = currentTime;
+
+            function updateCircle() {
+                switch(breathingModes[currentMode].steps[currentStep]) {
+                    case "Breathe In":
+                        circle.style.transform = "scale(1)";
+                        body.style.backgroundColor = '#fff';
+                        break;
+                    case "Hold":
+                        break;
+                    case "Breathe Out":
+                        circle.style.transform = "scale(0)";
+                        body.style.backgroundColor = '#f9f9f9';
+                        break;
+                }
+                circle.style.transition = `transform ${breathingModes[currentMode].times[currentStep]}s`;
+                body.style.transition = `background-color ${breathingModes[currentMode].times[currentStep]}s`;
+            }
+
+            function step() {
+                if (currentTime == 0) {
+                    currentStep = (currentStep + 1) % breathingModes[currentMode].steps.length;
+                    currentTime = breathingModes[currentMode].times[currentStep];
+                    status.textContent = breathingModes[currentMode].steps[currentStep];
+                    updateCircle();
+                }
+                currentTime -= 1;
+                counter.textContent = currentTime;
+            }
+
+            function changeBreathing(mode) {
+                currentMode = mode;
+                currentStep = 0;
+                currentTime = breathingModes[currentMode].times[currentStep];
+                status.textContent = breathingModes[currentMode].steps[currentStep];
+                counter.textContent = currentTime;
+                updateCircle();
+                toggleMenu();
+            }
+
+            function toggleMenu() {
+                const menu = document.getElementById('selectionMenu');
+                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+            }
+
+            // Initial animation
+            updateCircle();
+
+            setInterval(step, 1000);
+
+            window.changeBreathing = changeBreathing;
+            window.toggleMenu = toggleMenu;
+        }
+    </script>
 </body>
 </html>
