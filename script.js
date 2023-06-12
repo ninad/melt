@@ -18,13 +18,13 @@ window.onload = function() {
         switch(boxBreathing.steps[currentStep]) {
             case "Breathe In":
                 circle.style.transform = "scale(1)";
-                body.style.backgroundColor = '#eee';
+                body.style.backgroundColor = '#fff';
                 break;
             case "Hold":
                 break;
             case "Breathe Out":
                 circle.style.transform = "scale(0)";
-                body.style.backgroundColor = '#fff';
+                body.style.backgroundColor = '#f9f9f9';
                 break;
         }
         circle.style.transition = `transform ${boxBreathing.times[currentStep]}s`;

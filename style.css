@@ -15,6 +15,8 @@ body {
     border-radius: 50%;
     background-color: #fff;
     overflow: hidden;
+    border: 1px solid rgb(231, 231, 231);
+
 }
 
 #animatedCircle {
@@ -22,7 +24,7 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: rgb(98, 98, 98);
+    background-color: rgb(238, 238, 238);
     transform: scale(0);
     transition: transform 4s;
     transform-origin: center;
@@ -32,8 +34,12 @@ body {
     position: absolute;
     width: 100%;
     text-align: center;
-    font-size: 2em;
-    color: #9d9d9d;
+    font-size: 1.5em;
+    color: #3a466b;
+}
+
+#counter {
+    font-size: 1em;
 }
 
 #status {
@@ -46,14 +52,17 @@ body {
 
 /* Media queries for different viewport sizes */
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 580px) {
     #status, #counter {
-        font-size: 1.5em;
+        font-size: 2.5em;
     }
-}
 
-@media only screen and (max-width: 480px) {
-    #status, #counter {
-        font-size: 1em;
+    #container {
+        width: 350px;
+        height: 350px;
+        position: relative;
+        border-radius: 50%;
+        background-color: #fff;
+        overflow: hidden;
     }
-}
+}   
