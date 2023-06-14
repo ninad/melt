@@ -213,8 +213,27 @@
 
             function toggleMenu() {
                 const menu = document.getElementById('selectionMenu');
-                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                if (menu.style.display === 'block') {
+                    menu.style.display = 'none';
+                } else {
+                    menu.style.display = 'block';
+                    setTimeout(() => {
+                        // Set up a one-time event listener
+                        document.body.addEventListener('click', bodyClickListener);
+                    }, 0);
+                }
             }
+
+            function bodyClickListener(e) {
+                const menu = document.getElementById('selectionMenu');
+                if (e.target !== menu && !menu.contains(e.target)) {
+                    menu.style.display = 'none';
+                    // Remove the listener after it runs once
+                    document.body.removeEventListener('click', bodyClickListener);
+                }
+            }
+
+            
 
             // Initial animation
             updateCircle();
