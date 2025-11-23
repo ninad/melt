@@ -1,0 +1,17 @@
+{
+  "name": "melt",
+  "version": "1.0.0",
+  "description": "Modern breathwork progressive web app set up for Capacitor builds.",
+  "scripts": {
+    "serve": "http-server . -p 4173 -c-1",
+    "start": "npm run serve",
+    "build": "echo \"Static build already ready in /\""
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.2.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0",
+    "http-server": "^14.1.1"
+  }
+}

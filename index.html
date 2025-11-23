@@ -1,15 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Box Breathing App</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Melt • Guided Breath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0d1b2a" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div id="container">
-        <div id="animatedCircle"></div>
-        <div id="status">Breathe In</div>
-        <div id="counter">4</div>
-    </div>
-    <script src="script.js"></script>
+  <header class="page-header">
+    <div class="brand">Melt</div>
+    <div class="pill">Guided Breath • Built for web & mobile</div>
+  </header>
+
+  <main class="layout">
+    <section class="hero">
+      <p class="eyebrow">Mindful cadence</p>
+      <h1>Modern breathwork that travels with you.</h1>
+      <p class="lede">
+        Choose a pattern, press start, and follow the rhythm. Melt adapts to every screen, runs offline, and is ready to ship to mobile with Capacitor.
+      </p>
+      <div class="actions">
+        <button id="startPause" class="btn primary">Start session</button>
+        <button id="reset" class="btn ghost">Reset</button>
+      </div>
+      <div class="quick-stats" aria-live="polite">
+        <div class="stat">
+          <span class="label">Current step</span>
+          <span class="value" id="status">—</span>
+        </div>
+        <div class="stat">
+          <span class="label">Seconds left</span>
+          <span class="value" id="counter">0</span>
+        </div>
+        <div class="stat">
+          <span class="label">Pattern</span>
+          <span class="value" id="patternLabel">Box (4•4•4•4)</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="visual" aria-hidden="true">
+        <div class="ring"></div>
+        <div class="pulse"></div>
+        <div class="next-step" id="nextStep">Tap start to begin</div>
+      </div>
+
+      <div class="controls">
+        <div class="control-row">
+          <label for="pattern">Pattern</label>
+          <div class="select-wrap">
+            <select id="pattern">
+              <option value="box">Box (4-4-4-4)</option>
+              <option value="relax">Relax (4-7-8)</option>
+              <option value="focus">Focus (6-2-6-2)</option>
+              <option value="custom">Custom</option>
+            </select>
+            <span class="hint">Optimized for tactile mobile controls</span>
+          </div>
+        </div>
+
+        <div class="grid custom-grid" id="customGrid">
+          <div class="control-row">
+            <label for="inhale">Inhale</label>
+            <input type="number" id="inhale" min="2" max="20" value="4" />
+          </div>
+          <div class="control-row">
+            <label for="hold">Hold</label>
+            <input type="number" id="hold" min="0" max="20" value="4" />
+          </div>
+          <div class="control-row">
+            <label for="exhale">Exhale</label>
+            <input type="number" id="exhale" min="2" max="30" value="8" />
+          </div>
+          <div class="control-row">
+            <label for="hold2">Hold</label>
+            <input type="number" id="hold2" min="0" max="20" value="4" />
+          </div>
+        </div>
+
+        <div class="meter" aria-hidden="true">
+          <div class="meter-bar" id="progressBar"></div>
+        </div>
+
+        <div class="helper">
+          <p class="title">Session tips</p>
+          <ul>
+            <li>Find a comfortable seat and keep your shoulders soft.</li>
+            <li>Use headphones for subtle audio cues on mobile.</li>
+            <li>Save to your home screen for offline practice.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footnote">
+    <p>Offline-first, mobile-ready breathing crafted with love.</p>
+    <p class="tiny">Use the included PWA + Capacitor setup to ship to iOS, Android, and desktop.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

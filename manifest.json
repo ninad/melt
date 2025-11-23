@@ -1,0 +1,16 @@
+{
+  "name": "Melt Breathwork",
+  "short_name": "Melt",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0d1b2a",
+  "theme_color": "#0d1b2a",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

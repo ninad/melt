@@ -1,0 +1,6 @@
+{
+  "appId": "com.melt.breathwork",
+  "appName": "Melt",
+  "webDir": ".",
+  "bundledWebRuntime": false
+}
